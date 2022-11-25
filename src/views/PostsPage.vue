@@ -25,7 +25,7 @@
             <ion-input ref="title" type="text" placeholder="Post title."></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">Post</ion-label>
+            <ion-label position="stacked">Body</ion-label>
             <ion-input ref="body" type="text" placeholder="Post body."></ion-input>
           </ion-item>
         </ion-content>
@@ -98,7 +98,7 @@ export default defineComponent({
     confirm() {
       const title = this.$refs.title.$el.value;
       const body = this.$refs.body.$el.value;
-      this.$refs.modal.$el.dismiss({ title, body}, 'confirm');
+      this.$refs.modal.$el.dismiss({title, body}, 'confirm');
     },
     onWillDismiss(ev) {
       if (ev.detail.role === 'confirm') {
