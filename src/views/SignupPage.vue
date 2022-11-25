@@ -22,7 +22,7 @@
           <ion-col offset="1" size="4">
             <ion-item>
               <ion-label position="floating">Last Name</ion-label>
-              <ion-input v-model="user.last_name"></ion-input>
+              <ion-input :autofocus="true" v-model="user.last_name"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -135,6 +135,7 @@ export default defineComponent({
   methods: {
     showUserData() {
       console.log("User=> ", this.user);
+      this.$router.push({name: 'Posts'});
     },
     async showAlert() {
       const alert = await alertController.create({
@@ -148,6 +149,9 @@ export default defineComponent({
 
       this.user.first_name = '';
     }
+  },
+  created(){
+    console.log("REf=>", this.$refs.last_name_ref);
   }
 });
 </script>

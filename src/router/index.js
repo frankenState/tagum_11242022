@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import LandingPage from '../views/LandingPage';
 import AboutPage from '../views/AboutPage';
 import SignupPage from '../views/SignupPage';
+import PostsPage from '../views/PostsPage';
 
 
 const routes = [
@@ -23,6 +24,11 @@ const routes = [
     path: '/sign-up',
     name: 'SignUp',
     component: SignupPage
+  },
+  {
+    path: '/posts',
+    name: 'Posts',
+    component: PostsPage
   }
 ]
 
