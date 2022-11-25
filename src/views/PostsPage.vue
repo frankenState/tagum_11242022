@@ -101,6 +101,7 @@ export default defineComponent({
       this.$refs.modal.$el.dismiss({title, body}, 'confirm');
     },
     onWillDismiss(ev) {
+      console.log("onWillDismiss=>", ev);
       if (ev.detail.role === 'confirm') {
         //this.message = `Hello, ${ev.detail.data}!`;
         this.posts.unshift(ev.detail.data);

@@ -3,7 +3,10 @@ import LandingPage from '../views/LandingPage';
 import AboutPage from '../views/AboutPage';
 import SignupPage from '../views/SignupPage';
 import PostsPage from '../views/PostsPage';
-
+import TabsPage from '../views/TabsPage';
+import FirstPage from '../views/subviews/FirstPage';
+import SecondPage from '../views/subviews/SecondPage';
+import ThirdPage from '../views/subviews/ThirdPage';
 
 const routes = [
   {
@@ -29,6 +32,29 @@ const routes = [
     path: '/posts',
     name: 'Posts',
     component: PostsPage
+  },
+  {
+    path: '/tabs',
+    component: TabsPage,
+    children: [
+      { path: '/', redirect: '/tabs' },
+      {
+        path: '/tabs/first',
+        name: 'tabs_first',
+        component: FirstPage,
+      },
+      {
+        path: '/tabs/second',
+        name: 'tabs_second',
+        component: SecondPage,
+      },
+      {
+        path: '/tabs/third',
+        name: 'tabs_third',
+        component: ThirdPage,
+      },
+
+    ],
   }
 ]
 
