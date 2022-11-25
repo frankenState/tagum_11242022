@@ -37,6 +37,9 @@
         navigateTo(path){
             this.$router.push({'path': path});
         }
+    },
+    created() {
+        console.log("Parameter=> ", this.$route.params);
     }
   });
   </script>

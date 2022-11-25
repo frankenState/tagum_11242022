@@ -15,7 +15,7 @@ const routes = [
     component: LandingPage
   },
   {
-    path: '/about',
+    path: '/about/:id',
     name: 'About',
     component: AboutPage
   },
