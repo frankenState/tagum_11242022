@@ -8,16 +8,17 @@
     <ion-content :fullscreen="true">
 
       <ion-grid>
-        <ion-row>
+        <ion-row 
+          v-for="post in posts"
+          :key="post.id"
+        >
           <ion-col size="10" offset="1">
             <ion-card>
               <ion-card-header>
-                <ion-card-title>Card Title</ion-card-title>
-                <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+                <ion-card-title>{{ post.title }}</ion-card-title>
               </ion-card-header>
-
               <ion-card-content>
-                Here's a small text description for the card content. Nothing more, nothing less.
+                {{ post.body }}
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -29,9 +30,9 @@
 </template>
     
 <script>
-import { IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/vue';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonContent, IonHeader, IonPage, IonToolbar } from '@ionic/vue';
 import { defineComponent } from 'vue';
-
+import axios from "axios";
 
 export default defineComponent({
   name: 'HomePage',
@@ -39,12 +40,24 @@ export default defineComponent({
     IonContent,
     IonHeader,
     IonPage,
-    IonToolbar
+    IonToolbar,
+    IonCard, IonCardHeader, IonCardTitle, IonCardContent,
   },
   data() {
     return {
-      api_endpoint: 'https://jsonplaceholder.typicode.com/posts?_limit=10'
+      api_endpoint: 'https://jsonplaceholder.typicode.com/posts?_limit=10',
+      posts: [],
     }
+  },
+  methods: {
+    async getPosts() {
+      let resp = await axios.get(this.api_endpoint);
+      console.log("Response=> ", resp);
+      this.posts = resp.data;
+    }
+  },
+  created() {
+    this.getPosts();
   }
 });
 </script>
