@@ -20,6 +20,7 @@
               :body="post.body"
               :id="post.id" 
               @editPost="editPost"
+              @deletePost="deletePost"
             />
           </div>
         </ion-col>
@@ -101,6 +102,10 @@ export default defineComponent({
     },
     updateIsCreate(value){
       this.isCreate = value;
+    },
+    deletePost(id){
+      let temp = Object.assign(this.posts);
+      this.posts = temp.filter(post => post.id != id);
     }
   }
 });

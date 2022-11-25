@@ -3,6 +3,7 @@
     <h1>{{ title }}</h1>
     <p>{{ body }}</p>
     <button @click="editThisPost">Edit</button>
+    <button @click="deleteThisPost">Delete</button>
   </div>
 </template>
 
@@ -21,6 +22,11 @@ export default {
         body: this.body,
         id: this.id
       });
+    },
+    deleteThisPost(){
+      if (confirm("Are you sure?")){
+        this.$emit('deletePost', this.id);
+      }
     }
   }
 }
