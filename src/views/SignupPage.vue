@@ -16,7 +16,7 @@
                     <ion-col offset="2" size="4">
                         <ion-item>
                             <ion-label position="floating">First Name</ion-label>
-                            <ion-input></ion-input>
+                            <ion-input mode="ios"></ion-input>
                         </ion-item>
                     </ion-col>
                     <ion-col offset="1" size="4">
@@ -54,18 +54,18 @@
                         <ion-radio-group>
                             <ion-item>
                                 <ion-label>Male</ion-label>
-                                <ion-radio slot="end" value="Male"></ion-radio>
+                                <ion-radio mode="ios" slot="end" value="Male"></ion-radio>
                             </ion-item>
                             <ion-item>
                                 <ion-label>Female</ion-label>
-                                <ion-radio slot="end" value="Female"></ion-radio>
+                                <ion-radio mode="ios" slot="end" value="Female"></ion-radio>
                             </ion-item>
                         </ion-radio-group>
                     </ion-col>
                     <ion-col offset="1" size="4">
                         <ion-label>Available Government ID</ion-label>
                         <ion-item>
-                            <ion-select placeholder="Select all fruits that apply" :multiple="true">
+                            <ion-select mode="ios" placeholder="Select all fruits that apply" :multiple="true">
                                 <ion-select-option value="National ID">National ID</ion-select-option>
                                 <ion-select-option value="Driver's License">Driver's License</ion-select-option>
                                 <ion-select-option value="Passport">Passport</ion-select-option>
@@ -77,11 +77,17 @@
                     <ion-col offset="2" size="9">
                         <ion-item>
                             <ion-label>Date of Birth</ion-label>
-                            <ion-datetime-button datetime="datetime"></ion-datetime-button>
-                            <ion-modal :keep-contents-mounted="true">
-                                <ion-datetime id="datetime"></ion-datetime>
+                            <ion-datetime-button mode="ios" datetime="datetime"></ion-datetime-button>
+                            <ion-modal mode="ios" :keep-contents-mounted="true">
+                                <ion-datetime mode="ios" id="datetime"></ion-datetime>
                             </ion-modal>
                         </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col offset="2" size="9">
+                        <ion-button color="primary" mode="ios" expand="block">Submit</ion-button>
+                        <ion-button color="warning" mode="ios" expand="block">Cancel</ion-button>
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -90,13 +96,14 @@
 </template>
   
 <script>
-import { IonDatetime, IonDatetimeButton, IonModal, IonSelect, IonSelectOption, IonTextarea, IonItem, IonLabel, IonInput, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRadio, IonRadioGroup } from '@ionic/vue';
+import { IonButton, IonDatetime, IonDatetimeButton, IonModal, IonSelect, IonSelectOption, IonTextarea, IonItem, IonLabel, IonInput, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRadio, IonRadioGroup } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 
 export default defineComponent({
     name: 'HomePage',
     components: {
+        IonButton,
         IonDatetime, IonDatetimeButton, IonModal,
         IonSelect, IonSelectOption,
         IonContent,
