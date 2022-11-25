@@ -33,11 +33,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 
-  console.log("fullPath=> ", to);
+  console.log("To=> ", to);
   if (to.name == 'About'){
     next({name: 'Landing'})
-  } else 
-    next();
+  } else next();
 
 });
 
