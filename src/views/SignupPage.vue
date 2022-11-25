@@ -16,7 +16,7 @@
                     <ion-col offset="2" size="4">
                         <ion-item>
                             <ion-label position="floating">First Name</ion-label>
-                            <ion-input mode="ios"></ion-input>
+                            <ion-input v-model="user.first_name" mode="ios"></ion-input>
                         </ion-item>
                     </ion-col>
                     <ion-col offset="1" size="4">
@@ -86,7 +86,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col offset="2" size="9">
-                        <ion-button color="primary" mode="ios" expand="block">Submit</ion-button>
+                        <ion-button @click="showAlert" color="primary" mode="ios" expand="block">Submit</ion-button>
                         <ion-button color="warning" mode="ios" expand="block">Cancel</ion-button>
                     </ion-col>
                 </ion-row>
@@ -96,7 +96,7 @@
 </template>
   
 <script>
-import { IonButton, IonDatetime, IonDatetimeButton, IonModal, IonSelect, IonSelectOption, IonTextarea, IonItem, IonLabel, IonInput, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRadio, IonRadioGroup } from '@ionic/vue';
+import { alertController, IonButton, IonDatetime, IonDatetimeButton, IonModal, IonSelect, IonSelectOption, IonTextarea, IonItem, IonLabel, IonInput, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonRadio, IonRadioGroup } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 
@@ -118,6 +118,27 @@ export default defineComponent({
         IonRadio,
         IonRadioGroup
     },
+    data(){
+        return {
+            user: {
+                first_name: '',
+            }
+        }
+    },
+    methods: {
+        async showAlert() {
+            const alert = await alertController.create({
+                header: 'Alert',
+                subHeader: 'Important message',
+                message: 'This is an alert!',
+                buttons: ['OK'],
+            });
+
+            await alert.present();
+
+            this.user.first_name = '';
+        }
+    }
 });
 </script>
   
