@@ -7,7 +7,7 @@ import SignupPage from '../views/SignupPage';
 const routes = [
   {
     path: '/',
-    redirect: '/landing'
+    redirect: '/landing',
   },
   {
     path: '/landing',

@@ -13,13 +13,15 @@
       </ion-header>
       <div id="container">
         <h1>Welcome!</h1>
+        <ion-button router-link="/about">About Page</ion-button>
+        <ion-button @click="$router.push({name: 'SignUp'})">Sign Up</ion-button>
       </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -29,7 +31,8 @@ export default defineComponent({
     IonHeader,
     IonPage,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    IonButton
   },
 });
 </script>
