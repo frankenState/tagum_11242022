@@ -13,7 +13,7 @@
         </ion-header>
         <div id="container">
           <h1>Welcome!</h1>
-            <ion-button @click="navigateTo('/sign-up')">To Singup</ion-button>
+            <ion-button @click="navigateTo('/sign-up')">To Signup</ion-button>
         </div>
       </ion-content>
     </ion-page>
@@ -39,7 +39,7 @@
         }
     },
     created() {
-        console.log("Parameter=> ", this.$route.params);
+     //   console.log("Parameter=> ", this.$route.params);
     }
   });
   </script>

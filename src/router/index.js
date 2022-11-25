@@ -15,7 +15,7 @@ const routes = [
     component: LandingPage
   },
   {
-    path: '/about/:id',
+    path: '/about/:id?',
     name: 'About',
     component: AboutPage
   },
@@ -30,5 +30,15 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.beforeEach((to, from, next) => {
+
+  console.log("fullPath=> ", to);
+  if (to.name == 'About'){
+    next({name: 'Landing'})
+  } else 
+    next();
+
+});
 
 export default router
