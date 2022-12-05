@@ -16,7 +16,10 @@
           <ion-col offset="2" size="2">
             <ion-button color="dark" size="small" fill="outline"  router-link="/about">Sign In</ion-button>
           </ion-col>
-          <ion-col offset="3" size="2">
+          <ion-col>
+            <ion-button color="medium" size="small" fill="outline" @click="$router.push({ name: 'VuexPost' })">Vuex Posts</ion-button>
+          </ion-col>
+          <ion-col size="2">
             <ion-button color="medium" size="small" fill="outline" @click="$router.push({ name: 'SignUp' })">Sign Up</ion-button>
           </ion-col>
         </ion-row>

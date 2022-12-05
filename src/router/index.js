@@ -7,6 +7,8 @@ import TabsPage from '../views/TabsPage';
 import FirstPage from '../views/subviews/FirstPage';
 import SecondPage from '../views/subviews/SecondPage';
 import ThirdPage from '../views/subviews/ThirdPage';
+import VuexPostsPage from '../views/VuexPostPage';
+
 
 const routes = [
   {
@@ -32,6 +34,11 @@ const routes = [
     path: '/posts',
     name: 'Posts',
     component: PostsPage
+  },
+  {
+    path: '/vuex-posts',
+    name: 'VuexPost',
+    component: VuexPostsPage
   },
   {
     path: '/tabs',
