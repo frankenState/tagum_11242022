@@ -2,54 +2,41 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Vuex Posts</ion-title>
+        <ion-title>Users Page</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Vuex Posts</ion-title>
+          <ion-title size="large">Users Page</ion-title>
         </ion-toolbar>
       </ion-header>
+
       <ion-grid>
         <ion-row>
           <ion-col offset="2" size="8">
-            <ion-card v-for="post in posts" :key="post.id">
+            <ion-card v-for="user in users" :key="user.id">
+              <img alt="Silhouette of mountains" :src="`https://ionic-backend.000webhostapp.com/avatars/${user.avatar}`" />
               <ion-card-header>
-                <ion-card-title>{{ post.title }}</ion-card-title>
+                <ion-card-title>{{ user.first_name }} {{ user.last_name }}</ion-card-title>
+                <ion-card-subtitle>{{ user.email }}</ion-card-subtitle>
               </ion-card-header>
+
               <ion-card-content>
-                <ion-grid>
-                  <ion-row>
-                    <ion-col>{{ post.body }}</ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col>
-                      <ion-button mode="ios" @click="$router.push({ name: 'VuexEditPage', params: { id: post.id } })">
-                        <ion-icon slot="icon-only" :icon="cogOutline"></ion-icon>
-                      </ion-button>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
+                {{ user.bio }}
               </ion-card-content>
             </ion-card>
           </ion-col>
         </ion-row>
       </ion-grid>
-
     </ion-content>
   </ion-page>
 </template>
   
 <script>
-import {
-  IonButton, IonIcon,
-  IonCol, IonGrid, IonRow,
-  IonContent, IonHeader, IonPage, IonTitle, IonToolbar
-} from '@ionic/vue';
-import { cogOutline } from 'ionicons/icons';
+import {  IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { defineComponent } from 'vue';
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default defineComponent({
   name: 'HomePage',
@@ -59,31 +46,24 @@ export default defineComponent({
     IonPage,
     IonTitle,
     IonToolbar,
-    IonCol, IonGrid, IonRow,
-    IonButton, IonIcon
-    //   IonButton
+    // IonButton
   },
-  setup() {
-    return { cogOutline }
+  computed: {
+    ...mapGetters('users', {
+      users: 'getUsers'
+    })
   },
   methods: {
-    ...mapActions('posts', [
-      'fetchPosts',
+    ...mapActions('users', [
+      'fetchUsers',
     ]),
     navigateTo(path) {
       this.$router.push({ 'path': path });
     }
   },
-  computed: {
-    ...mapGetters('posts', {
-      posts: 'getPosts'
-    }),
-  },
   created() {
     //   console.log("Parameter=> ", this.$route.params);
-    this.fetchPosts()
-      .then(() => console.log("Line 56=>", this.posts))
-
+    this.fetchUsers().then(() => console.log(this.users));
   }
 });
 </script>

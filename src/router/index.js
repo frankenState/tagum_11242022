@@ -9,6 +9,7 @@ import SecondPage from '../views/subviews/SecondPage';
 import ThirdPage from '../views/subviews/ThirdPage';
 import VuexPostsPage from '../views/VuexPostPage';
 import VuexEditPage from '../views/VuexEditPage';
+import UsersPage from '../views/UsersPage';
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
     path: '/vuex-edit-page/:id',
     name: 'VuexEditPage',
     component: VuexEditPage
+  },
+  {
+    path: '/vuex-users-page',
+    name: 'UsersPage',
+    component: UsersPage
   },
   {
     path: '/tabs',

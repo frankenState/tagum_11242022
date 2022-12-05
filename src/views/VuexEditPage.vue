@@ -80,13 +80,27 @@ export default defineComponent({
 
     // this.post = this.posts.find(post => post.id == this.$route.params.id);
     
-    // console.log("created=>", this.posts.length);
-    const { id } = this.$route.params;
-    const { posts } = this;
-    if (this.posts.length == 0 || posts.find( post => post.id == id) == undefined){
-      this.$router.replace({ name: 'VuexPost'});
-      return;
-    }
+    this.fetchPosts().then(() => {
+      const { id } = this.$route.params;
+      const { posts } = this;
+
+      if ( posts.find( post => post.id == id) == undefined) {
+        this.$router.replace({name: 'VuexPost'});
+      } else {
+        this.post = posts.find(post => post.id == id);
+      }
+
+    });
+
+    
+    
+    
+    // if (this.posts.length == 0 || posts.find( post => post.id == id) == undefined){
+    //   this.$router.replace({ name: 'VuexPost'});
+    //   return;
+    // }
+
+
   }
 });
 </script>
