@@ -2,27 +2,24 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Vuex Posts</ion-title>
+        <ion-title>Vuex Edit</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Vuex Posts</ion-title>
+          <ion-title size="large">Vuex Edit</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-grid>
         <ion-row>
           <ion-col offset="2" size="8">
-            <ion-card v-for="post in posts" :key="post.id">
+            <ion-card>
               <ion-card-header>
                 <ion-card-title>{{ post.title }}</ion-card-title>
               </ion-card-header>
               <ion-card-content>
                 {{ post.body }}
-                <ion-button mode="ios" @click="$router.push({ name: 'VuexEditPage', params: { id: post.id }})">
-                  <ion-icon slot="icon-only" :icon="cogOutline"></ion-icon>
-                </ion-button>
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -32,19 +29,25 @@
     </ion-content>
   </ion-page>
 </template>
-  
+    
 <script>
 import {
-  IonButton, IonIcon,
+  // IonButton, IonIcon,
   IonCol, IonGrid, IonRow,
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar
 } from '@ionic/vue';
-import { cogOutline } from 'ionicons/icons';
+//   import { cogOutline } from 'ionicons/icons';
 import { defineComponent } from 'vue';
 import { mapActions, mapGetters } from "vuex";
 
 export default defineComponent({
   name: 'HomePage',
+  data: () => ({
+    post: {
+      title: '',
+      body: '',
+    }
+  }),
   components: {
     IonContent,
     IonHeader,
@@ -52,12 +55,12 @@ export default defineComponent({
     IonTitle,
     IonToolbar,
     IonCol, IonGrid, IonRow,
-    IonButton, IonIcon
+    //   IonButton, IonIcon
     //   IonButton
-  }, 
-  setup() {
-    return { cogOutline }
   },
+  // setup() {
+  //   return { cogOutline }
+  // },
   methods: {
     ...mapActions('posts', [
       'fetchPosts',
@@ -72,14 +75,22 @@ export default defineComponent({
     }),
   },
   created() {
-    //   console.log("Parameter=> ", this.$route.params);
-    this.fetchPosts()
-      .then(() => console.log("Line 56=>", this.posts))
+    //console.log("Parameter=> ", this.$route.params);
+    // console.log("Passed post=> ", this.posts.find( post => post.id == this.$route.params.id));
 
+    // this.post = this.posts.find(post => post.id == this.$route.params.id);
+    
+    // console.log("created=>", this.posts.length);
+    const { id } = this.$route.params;
+    const { posts } = this;
+    if (this.posts.length == 0 || posts.find( post => post.id == id) == undefined){
+      this.$router.replace({ name: 'VuexPost'});
+      return;
+    }
   }
 });
 </script>
-  
+    
 <style scoped>
 #container {
   text-align: center;
@@ -109,4 +120,4 @@ export default defineComponent({
   text-decoration: none;
 }
 </style>
-  
+    

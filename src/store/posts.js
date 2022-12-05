@@ -8,7 +8,6 @@ const state = () => ({
 
 const getters = {
   getPosts(state) {
-    console.log("Line 11 posts.js=> ", state);
     return state.posts;
   },
   getPost(state) {
@@ -19,7 +18,6 @@ const getters = {
 const mutations = {
   setPosts(state, payload){
     state.posts = payload;
-    console.log("Line 22 post.js=> ", state.posts);
   },
   setPost(state, payload){
     state.post = payload;

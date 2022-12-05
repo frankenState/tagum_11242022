@@ -8,7 +8,7 @@ import FirstPage from '../views/subviews/FirstPage';
 import SecondPage from '../views/subviews/SecondPage';
 import ThirdPage from '../views/subviews/ThirdPage';
 import VuexPostsPage from '../views/VuexPostPage';
-
+import VuexEditPage from '../views/VuexEditPage';
 
 const routes = [
   {
@@ -39,6 +39,11 @@ const routes = [
     path: '/vuex-posts',
     name: 'VuexPost',
     component: VuexPostsPage
+  },
+  {
+    path: '/vuex-edit-page/:id',
+    name: 'VuexEditPage',
+    component: VuexEditPage
   },
   {
     path: '/tabs',
