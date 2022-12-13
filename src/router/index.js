@@ -10,6 +10,9 @@ import ThirdPage from '../views/subviews/ThirdPage';
 import VuexPostsPage from '../views/VuexPostPage';
 import VuexEditPage from '../views/VuexEditPage';
 import UsersPage from '../views/UsersPage';
+import Login from '../views/authentication/Login';
+import Registration from '../views/authentication/Registration';
+import Dashboard from '../views/authentication/Dashboard';
 
 const routes = [
   {
@@ -20,6 +23,21 @@ const routes = [
     path: '/landing',
     name: 'Landing',
     component: LandingPage
+  },
+  {
+    path:'/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+  },
+  {
+    path: '/register',
+    name: 'RegistrationPage',
+    component: Registration
+  },
+  {
+    path: '/login',
+    name: 'Loginpage',
+    component: Login
   },
   {
     path: '/about/:id?',
