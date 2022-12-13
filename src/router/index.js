@@ -101,11 +101,13 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 
-  console.log("To=> ", to);
-  if (to.name == 'About'){
-    next({name: 'Landing'})
-  } else next();
-
+  if (to.name == 'Dashboard' && localStorage.getItem('auth') == null)
+    next({ name: 'Loginpage'});
+  else if (localStorage.getItem('auth') != null && (to.name == 'RegistrationPage' || to.name == 'Loginpage'))
+    next({ name: 'Dashboard' });
+  else
+    next();
+    
 });
 
 export default router

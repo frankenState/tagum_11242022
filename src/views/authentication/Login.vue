@@ -31,7 +31,8 @@
                       <ion-input v-model="password" type="password"></ion-input>
                     </ion-item>
                     <ion-button @click="login" mode="ios" expand="block">Login</ion-button>
-                    <ion-button color="medium" @click="navigateTo('/register')" mode="ios" expand="block">Registration</ion-button>
+                    <ion-button color="medium" @click="navigateTo('/register')" mode="ios"
+                      expand="block">Registration</ion-button>
                   </ion-list>
                 </ion-card-content>
               </ion-card>
@@ -44,9 +45,12 @@
 </template>
   
 <script>
-import { IonList, IonCard, IonLabel, IonGrid, IonRow, IonCol,
-  IonButton, IonInput, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import {
+  IonList, IonCard, IonLabel, IonGrid, IonRow, IonCol,
+  IonButton, IonInput, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, alertController
+} from '@ionic/vue';
 import { defineComponent } from 'vue';
+import { mapActions } from "vuex";
 
 export default defineComponent({
   name: 'LoginPage',
@@ -66,8 +70,39 @@ export default defineComponent({
     }
   },
   methods: {
-    login(){
-      console.log(this.email, this.password);
+    ...mapActions("users", {
+      signIn: "login"
+    }),
+    login() {
+      let form = new FormData();
+      form.append('email', this.email);
+      form.append('password', this.password);
+
+      this.signIn(form)
+        .then(e => {
+          if (e == 0) {
+            this.showResponse({
+              header: "Error",
+              subHeader: "Email or Password is incorrect.",
+              message: "Please, double check your credentials."
+            });
+          } else {
+            this.email  ='';
+            this.password = '';
+            this.navigateTo('/dashboard');
+          }
+        }).catch(e => console.log("Error=> ", e.message));
+    },
+    async showResponse({header, subHeader, message}) {
+      const alert = await alertController.create({
+        header,
+        subHeader,
+        message,
+        buttons: ['OK'],
+        mode: "ios",
+      });
+
+      await alert.present();
     },
     navigateTo(path) {
       this.$router.push({ 'path': path });

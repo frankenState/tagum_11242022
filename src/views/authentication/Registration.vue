@@ -19,29 +19,31 @@
                 <ion-card-header>
                   <ion-card-title>Make sure to fill-out all fields.</ion-card-title>
                 </ion-card-header>
-
-                <ion-card-content>
-                  <ion-list>
-                    <ion-item>
-                      <ion-label position="stacked">First Name</ion-label>
-                      <ion-input v-model="first_name" type="text"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                      <ion-label position="stacked">Last Name</ion-label>
-                      <ion-input v-model="last_name" type="text"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                      <ion-label position="stacked">Email</ion-label>
-                      <ion-input v-model="email" type="email"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                      <ion-label position="stacked">Password</ion-label>
-                      <ion-input v-model="password" type="password"></ion-input>
-                    </ion-item>
-                    <ion-button @click="register" mode="ios" expand="block">Register</ion-button>
-                    <ion-button color="medium" @click="navigateTo('/login')" mode="ios" expand="block">Login</ion-button>
-                  </ion-list>
-                </ion-card-content>
+                <form @submit.prevent="register">
+                  <ion-card-content>
+                    <ion-list>
+                      <ion-item>
+                        <ion-label position="stacked">First Name</ion-label>
+                        <ion-input required v-model="first_name" type="text"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label position="stacked">Last Name</ion-label>
+                        <ion-input required v-model="last_name" type="text"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label position="stacked">Email</ion-label>
+                        <ion-input required v-model="email" type="email"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label position="stacked">Password</ion-label>
+                        <ion-input required v-model="password" type="password"></ion-input>
+                      </ion-item>
+                      <ion-button type="submit" mode="ios" expand="block">Register</ion-button>
+                      <ion-button color="medium" @click="navigateTo('/login')" mode="ios"
+                        expand="block">Login</ion-button>
+                    </ion-list>
+                  </ion-card-content>
+                </form>
               </ion-card>
             </ion-col>
           </ion-row>
@@ -83,6 +85,7 @@ export default defineComponent({
       'registration'
     ]),
     register() {
+
       let data = new FormData();
       data.append('first_name', this.first_name);
       data.append('last_name', this.last_name);
@@ -90,9 +93,13 @@ export default defineComponent({
       data.append('password', this.password);
 
       this.registration(data)
-          .then(() => {
-            this.navigateTo('/dashboard');
-          }).catch(e => console.log(e.message));
+        .then(() => {
+          this.first_name = '';
+          this.last_name = '';
+          this.email = '';
+          this.password = '';
+          this.navigateTo('/dashboard');
+        }).catch(e => console.log(e.message));
     },
     navigateTo(path) {
       this.$router.push({ 'path': path });
