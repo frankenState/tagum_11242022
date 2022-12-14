@@ -25,9 +25,9 @@ const mutations = {
 
 const actions = {
   async fetchUsers({commit}){
-    let res = await axios.get('https://ionic-backend.000webhostapp.com/index.php?a=users');
+    let res = await axios.get(`${process.env.VUE_APP_API_URL}/users.php`);
 
-    commit('setUsers', res.data.users);
+    commit('setUsers', res.data);
   },
   async registration({commit}, payload){
     let res = await axios.post(process.env.VUE_APP_API_URL +  '/new_user.php', payload);

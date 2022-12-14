@@ -9,10 +9,10 @@ import SecondPage from '../views/subviews/SecondPage';
 import ThirdPage from '../views/subviews/ThirdPage';
 import VuexPostsPage from '../views/VuexPostPage';
 import VuexEditPage from '../views/VuexEditPage';
-import UsersPage from '../views/UsersPage';
 import Login from '../views/authentication/Login';
 import Registration from '../views/authentication/Registration';
 import Dashboard from '../views/authentication/Dashboard';
+import UsersPage from '../views/crud/UsersPage';
 
 const routes = [
   {
@@ -25,6 +25,11 @@ const routes = [
     component: LandingPage
   },
   {
+    path: '/users',
+    name: 'UsersPage',
+    component: UsersPage
+  },
+  {
     path:'/dashboard',
     name: 'Dashboard',
     component: Dashboard,
@@ -32,7 +37,7 @@ const routes = [
   {
     path: '/register',
     name: 'RegistrationPage',
-    component: Registration
+    component: Registration,
   },
   {
     path: '/login',
@@ -63,11 +68,6 @@ const routes = [
     path: '/vuex-edit-page/:id',
     name: 'VuexEditPage',
     component: VuexEditPage
-  },
-  {
-    path: '/vuex-users-page',
-    name: 'UsersPage',
-    component: UsersPage
   },
   {
     path: '/tabs',

@@ -3,6 +3,11 @@
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-title>Dashboard Page</ion-title>
+        <ion-buttons slot="end">
+          <ion-button>
+            <ion-button mode="ios" @click="logout">Logout</ion-button>
+          </ion-button>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
@@ -12,8 +17,36 @@
         </ion-toolbar>
       </ion-header>
       <div id="container">
-        <h1>Welcome to Dashboard!</h1>
-        <ion-button @click="logout">Logout</ion-button>
+       
+
+        <ion-grid>
+          <ion-row>
+            <ion-col offset="2" size="8">
+              <h1>Welcome to Dashboard!</h1>
+            </ion-col>
+            <ion-col offset="2" size="8">
+              <ion-button @click="navigateTo('/users')" fill="outline" color="dark">Show Users</ion-button>
+            </ion-col>
+            <ion-col offset="2" size="8">
+              <ion-card v-for="grade in grades" :key="grade.id">
+                <ion-card-header>
+                  <ion-card-title>{{ grade.subject }}</ion-card-title>
+                </ion-card-header>
+
+                <ion-card-content>
+                  <ion-chip :color="grade.grade > 74 ? 'success' : 'warning'">
+                    <ion-icon :icon="documentAttachOutline" :color="grade.grade > 74 ? 'success' : 'warning'"></ion-icon>
+                    <ion-label>{{ grade.grade }}</ion-label>
+                  </ion-chip>
+                  <ion-chip :color="grade.grade > 74 ? 'success' : 'warning'">
+                    <ion-icon :icon="grade.grade > 74 ? starOutline: warningOutline" :color="grade.grade > 74 ? 'success' : 'warning'"></ion-icon>
+                    <ion-label>{{ grade.remarks }}</ion-label>
+                  </ion-chip>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
     </ion-content>
   </ion-page>
@@ -21,34 +54,53 @@
     
 <script>
 import {
-  // IonList, IonCard, IonLabel, IonGrid, IonRow, IonCol,IonInput, IonButton,
-
+  // IonList, IonCard, IonLabel, IonGrid, IonRow, IonCol,IonInput, IonButton,IonAvatar,
+  
+  IonButtons,
   IonButton,
-  IonContent, IonHeader, IonPage, IonTitle, IonToolbar
+  IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
+  IonChip,  IonLabel, IonIcon,
 } from '@ionic/vue';
 import { defineComponent } from 'vue';
+import { mapActions, mapGetters } from "vuex";
+
+import {  closeCircle, starOutline, warningOutline, documentAttachOutline } from 'ionicons/icons';
 
 export default defineComponent({
-  name: 'LoginPage',
+  name: 'DashboardPage',
   components: {
+    IonButtons,
     IonContent,
     IonHeader,
     IonPage,
     IonTitle,
     IonToolbar,
     IonButton,
+    IonChip, IonLabel, IonIcon,
     //   IonList, IonCard, IonLabel, IonGrid, IonRow, IonCol, IonInput
   },
   data() {
     return {
       email: '',
       password: '',
+      starOutline,
+      closeCircle,
+      warningOutline,
+      documentAttachOutline
     }
   },
+  computed: {
+    ...mapGetters('grades', {
+      grades: 'getGrades'
+    }),
+  },
   methods: {
-    logout(){
+    ...mapActions('grades', [
+      'fetchGrades'
+    ]),
+    logout() {
       localStorage.clear();
-      this.$router.replace({ name: 'Loginpage'});
+      this.$router.replace({ name: 'Loginpage' });
     },
     navigateTo(path) {
       this.$router.push({ 'path': path });
@@ -56,21 +108,12 @@ export default defineComponent({
   },
   created() {
     //   console.log("Parameter=> ", this.$route.params);
+    this.fetchGrades();
   }
 });
 </script>
     
 <style scoped>
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 #container strong {
   font-size: 20px;
   line-height: 26px;
