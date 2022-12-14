@@ -21,11 +21,16 @@
             <ion-accordion-group>
               <ion-accordion v-for="user in users" :key="user.id" :value="user.id">
                 <ion-item slot="header" color="light">
-
                   <ion-label>{{ `${user.first_name} ${user.last_name}` }}</ion-label>
                   <ion-badge fill="outline" color="primary">{{ user.grades.length }}</ion-badge>
                 </ion-item>
                 <div class="ion-padding" slot="content">
+                  <ion-button
+                    @click="$router.push({
+                      name: 'NewGradePage',
+                      params: { 'user_id': user.id }
+                    })"
+                  >New Grade</ion-button>
                   <table width="100%" v-if="user.grades.length > 0">
                     <thead style="background-color:#f4f5f8">
                       <tr>

@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import axios from 'axios';
 
 const state = () => ({
@@ -22,6 +23,21 @@ const actions = {
 
     // console.log("grades=> ", res.data, commit);
     commit('setGrades', res.data);
+  },
+  async newGrade({}, {
+    user_id,
+    subject,
+    grade,
+    remarks
+  }){
+    let form = new FormData();
+    form.append('user_id', user_id);
+    form.append('subject', subject);
+    form.append('grade', grade);
+    form.append('remarks', remarks);
+    let res = await axios.post(`${process.env.VUE_APP_API_URL}/grades.php?a=new`, form);
+
+    return res.data.status;
   }
 }
 

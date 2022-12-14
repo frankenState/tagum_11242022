@@ -13,6 +13,7 @@ import Login from '../views/authentication/Login';
 import Registration from '../views/authentication/Registration';
 import Dashboard from '../views/authentication/Dashboard';
 import UsersPage from '../views/crud/UsersPage';
+import CreateGradePage from '../views/crud/CreateGradePage';
 
 const routes = [
   {
@@ -28,6 +29,11 @@ const routes = [
     path: '/users',
     name: 'UsersPage',
     component: UsersPage
+  },
+  {
+    path: '/new-grade/:user_id',
+    name: 'NewGradePage',
+    component: CreateGradePage
   },
   {
     path:'/dashboard',
