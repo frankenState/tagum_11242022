@@ -1,8 +1,8 @@
 <template>
   <ion-page>
     <ion-content :fullscreen="true">
-      <ion-grid>
-        <ion-row>
+      <ion-grid style="height:100%;">
+        <ion-row style="height: 100%">
           <ion-col size="2">
             <ion-item lines="none">
               <ion-avatar slot="start">

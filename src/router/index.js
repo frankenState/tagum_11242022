@@ -118,29 +118,29 @@ const routes = [
     name: 'VuexEditPage',
     component: VuexEditPage
   },
-  // {
-  //   path: '/tabs',
-  //   component: TabsPage,
-  //   children: [
-  //     { path: '/', redirect: '/tabs' },
-  //     {
-  //       path: '/tabs/first',
-  //       name: 'tabs_first',
-  //       component: FirstPage,
-  //     },
-  //     {
-  //       path: '/tabs/second',
-  //       name: 'tabs_second',
-  //       component: SecondPage,
-  //     },
-  //     {
-  //       path: '/tabs/third',
-  //       name: 'tabs_third',
-  //       component: ThirdPage,
-  //     },
+  {
+    path: '/tabs',
+    component: TabsPage,
+    children: [
+      { path: '/', redirect: '/tabs' },
+      {
+        path: '/tabs/first',
+        name: 'tabs_first',
+        component: FirstPage,
+      },
+      {
+        path: '/tabs/second',
+        name: 'tabs_second',
+        component: SecondPage,
+      },
+      {
+        path: '/tabs/third',
+        name: 'tabs_third',
+        component: ThirdPage,
+      },
 
-  //   ],
-  // }
+    ],
+  }
 ]
 
 const router = createRouter({
