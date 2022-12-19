@@ -33,4 +33,13 @@ tr.row:hover {
   background-color:#d2d2d2;
   transition-duration: 800ms;
 }
+
+table, td, th {
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+
+table {
+  border-radius: 25px;
+}
 </style>

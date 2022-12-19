@@ -56,7 +56,8 @@ export default {
       columns: [
         {
           key: 'id',
-          label: 'ID'
+          label: 'ID',
+          justify: 'center'
         },
         {
           key: 'first_name',
