@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import LandingPage from '../views/LandingPage';
 import AboutPage from '../views/AboutPage';
@@ -15,12 +16,47 @@ import Dashboard from '../views/authentication/Dashboard';
 import UsersPage from '../views/crud/UsersPage';
 import CreateGradePage from '../views/crud/CreateGradePage';
 import AllUsers from '../views/crud/AllUsers';
-
+import Dashboardv2 from '../views/authentication/Dashboardv2';
+import MessagesPage from '../views/dashboard-v2/Messages';
+import OutdoorsPage from '../views/dashboard-v2/Outdoors';
+import ReportsPage from '../views/dashboard-v2/Reports';
+import SchedulePage from '../views/dashboard-v2/Schedule';
 
 const routes = [
   {
     path: '/',
     redirect: '/landing',
+  },
+  {
+    path: '/dashboard-v2',
+    name: 'Dashboardv2',
+    component: Dashboardv2,
+    children: [
+      {
+        path: '/dashboard-v2/',
+        redirect: '/dashboard-v2/reports'
+      },
+      {
+        path: '/dashboard-v2/reports',
+        name: 'ReportsPage',
+        component: ReportsPage,
+      },
+      {
+        path: '/dashboard-v2/outdoors',
+        name: 'OutdoorsPage',
+        component: OutdoorsPage,
+      },
+      {
+        path: '/dashboard-v2/messages',
+        name: 'MessagesPage',
+        component: MessagesPage,
+      },
+      {
+        path: '/dashboard-v2/schedule',
+        name: 'SchedulePage',
+        component: SchedulePage,
+      },
+    ]
   },
   {
     path: '/all-users',
@@ -82,29 +118,29 @@ const routes = [
     name: 'VuexEditPage',
     component: VuexEditPage
   },
-  {
-    path: '/tabs',
-    component: TabsPage,
-    children: [
-      { path: '/', redirect: '/tabs' },
-      {
-        path: '/tabs/first',
-        name: 'tabs_first',
-        component: FirstPage,
-      },
-      {
-        path: '/tabs/second',
-        name: 'tabs_second',
-        component: SecondPage,
-      },
-      {
-        path: '/tabs/third',
-        name: 'tabs_third',
-        component: ThirdPage,
-      },
+  // {
+  //   path: '/tabs',
+  //   component: TabsPage,
+  //   children: [
+  //     { path: '/', redirect: '/tabs' },
+  //     {
+  //       path: '/tabs/first',
+  //       name: 'tabs_first',
+  //       component: FirstPage,
+  //     },
+  //     {
+  //       path: '/tabs/second',
+  //       name: 'tabs_second',
+  //       component: SecondPage,
+  //     },
+  //     {
+  //       path: '/tabs/third',
+  //       name: 'tabs_third',
+  //       component: ThirdPage,
+  //     },
 
-    ],
-  }
+  //   ],
+  // }
 ]
 
 const router = createRouter({
