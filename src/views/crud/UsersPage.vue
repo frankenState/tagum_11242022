@@ -25,25 +25,32 @@
                   <ion-badge fill="outline" color="primary">{{ user.grades.length }}</ion-badge>
                 </ion-item>
                 <div class="ion-padding" slot="content">
-                  <ion-button
-                    @click="$router.push({
-                      name: 'NewGradePage',
-                      params: { 'user_id': user.id }
-                    })"
-                  >New Grade</ion-button>
+                  <ion-button size="small" @click="$router.push({
+                    name: 'NewGradePage',
+                    params: { 'user_id': user.id }
+                  })">New Grade</ion-button>
                   <table width="100%" v-if="user.grades.length > 0">
                     <thead style="background-color:#f4f5f8">
                       <tr>
                         <th style="padding: 10px 0 10px 0">Subject</th>
                         <th style="padding: 10px 0 10px 0">Grade</th>
                         <th style="padding: 10px 0 10px 0">Remarks</th>
+                        <th style="padding: 10px 0 10px 0">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr v-for="grade in user.grades" :key="grade.id">
-                        <td style="padding: 5px 0 5px 0">{{grade.subject}}</td>
-                        <td style="text-align:center;padding: 5px 0 5px 0">{{grade.grade}}</td>
-                        <td style="text-align:center;padding: 5px 0 5px 0">{{grade.remarks}}</td>
+                        <td style="padding: 5px 0 5px 0">{{ grade.subject }}</td>
+                        <td style="text-align:center;padding: 5px 0 5px 0">{{ grade.grade }}</td>
+                        <td style="text-align:center;padding: 5px 0 5px 0">{{ grade.remarks }}</td>
+                        <td style="text-align:center;padding: 5px 0 5px 0">
+                          <ion-button size="small" color="light">
+                            <ion-icon slot="icon-only" :icon="createOutline"></ion-icon>
+                          </ion-button>
+                          <ion-button size="small" color="warning">
+                            <ion-icon slot="icon-only" :icon="trashBinOutline"></ion-icon>
+                          </ion-button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -65,16 +72,26 @@ import {
   IonAccordionGroup,
   IonItem,
   IonLabel,
-  // IonButton, 
+  IonButton,
+  IonIcon,
   IonBadge,
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar
 } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { mapActions, mapGetters } from 'vuex';
+import { createOutline, trashBinOutline } from 'ionicons/icons';
 
 export default defineComponent({
   name: 'UsersPage',
+  data() {
+    return {
+      createOutline,
+      trashBinOutline
+    }
+  },
   components: {
+    IonButton,
+    IonIcon,
     IonBadge,
     IonAccordion,
     IonAccordionGroup,
