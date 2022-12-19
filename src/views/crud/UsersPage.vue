@@ -44,10 +44,16 @@
                         <td style="text-align:center;padding: 5px 0 5px 0">{{ grade.grade }}</td>
                         <td style="text-align:center;padding: 5px 0 5px 0">{{ grade.remarks }}</td>
                         <td style="text-align:center;padding: 5px 0 5px 0">
-                          <ion-button size="small" color="light">
+                          <ion-button @click="$router.push({ 
+                            name: 'NewGradePage',
+                            params: { 
+                              'user_id': user.id,
+                              'grade_id' : grade.id
+                            }
+                          })" size="small" color="light">
                             <ion-icon slot="icon-only" :icon="createOutline"></ion-icon>
                           </ion-button>
-                          <ion-button size="small" color="warning">
+                          <ion-button @click="presentDeleteAlert(grade.id)" size="small" color="warning">
                             <ion-icon slot="icon-only" :icon="trashBinOutline"></ion-icon>
                           </ion-button>
                         </td>
@@ -66,6 +72,7 @@
 </template>
   
 <script>
+/* eslint-disable */ 
 import {
   // accordion
   IonAccordion,
@@ -75,11 +82,14 @@ import {
   IonButton,
   IonIcon,
   IonBadge,
-  IonContent, IonHeader, IonPage, IonTitle, IonToolbar
+  IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
+
+  alertController 
 } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import { defineComponent  } from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 import { createOutline, trashBinOutline } from 'ionicons/icons';
+
 
 export default defineComponent({
   name: 'UsersPage',
@@ -102,7 +112,8 @@ export default defineComponent({
     IonPage,
     IonTitle,
     IonToolbar,
-    //   IonButton
+  // custom components
+
   },
   computed: {
     ...mapGetters('users', {
@@ -113,8 +124,41 @@ export default defineComponent({
     ...mapActions('users', [
       'fetchUsers'
     ]),
+    ...mapActions('grades', [
+      'deleteGrade'
+    ]),
     navigateTo(path) {
       this.$router.push({ 'path': path });
+    },
+    async presentDeleteAlert(grade_id) {
+      const alert = await alertController.create({
+          header: 'Are you sure?',
+          subHeader: 'This action is delete.',
+          mode: "ios",
+          buttons: [
+            {
+              text: 'Cancel',
+              role: 'cancel',
+              handler: () => {
+                console.log("cancel delete=> ", grade_id);
+              },
+            },
+            {
+              text: 'OK',
+              role: 'confirm',
+              handler: () => {
+                this.deleteGrade(grade_id)
+                  .then(res => {
+                    console.log('Res=> ', res);
+                    this.fetchUsers();
+                  }).catch( e => console.log("Error=> ", e));
+                console.log("deleting=> ", grade_id);
+              },
+            },
+          ],
+        });
+
+        await alert.present();
     }
   },
   created() {

@@ -1,6 +1,17 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
+
+    <header-component title="Dashboard">
+      <template v-slot:buttons>
+        <ion-buttons slot="end">
+          <ion-button>
+            <ion-button mode="ios" @click="logout">Logout</ion-button>
+          </ion-button>
+        </ion-buttons>
+      </template>
+
+    </header-component>
+    <!-- <ion-header :translucent="true">
       <ion-toolbar>
         <ion-title>Dashboard Page</ion-title>
         <ion-buttons slot="end">
@@ -9,7 +20,7 @@
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
-    </ion-header>
+    </ion-header> -->
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -17,7 +28,7 @@
         </ion-toolbar>
       </ion-header>
       <div id="container">
-       
+
 
         <ion-grid>
           <ion-row>
@@ -35,11 +46,13 @@
 
                 <ion-card-content>
                   <ion-chip :color="grade.grade > 74 ? 'success' : 'warning'">
-                    <ion-icon :icon="documentAttachOutline" :color="grade.grade > 74 ? 'success' : 'warning'"></ion-icon>
+                    <ion-icon :icon="documentAttachOutline"
+                      :color="grade.grade > 74 ? 'success' : 'warning'"></ion-icon>
                     <ion-label>{{ grade.grade }}</ion-label>
                   </ion-chip>
                   <ion-chip :color="grade.grade > 74 ? 'success' : 'warning'">
-                    <ion-icon :icon="grade.grade > 74 ? starOutline: warningOutline" :color="grade.grade > 74 ? 'success' : 'warning'"></ion-icon>
+                    <ion-icon :icon="grade.grade > 74 ? starOutline : warningOutline"
+                      :color="grade.grade > 74 ? 'success' : 'warning'"></ion-icon>
                     <ion-label>{{ grade.remarks }}</ion-label>
                   </ion-chip>
                 </ion-card-content>
@@ -53,18 +66,20 @@
 </template>
     
 <script>
+/* eslint-disable */
 import {
   // IonList, IonCard, IonLabel, IonGrid, IonRow, IonCol,IonInput, IonButton,IonAvatar,
-  
+
   IonButtons,
   IonButton,
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-  IonChip,  IonLabel, IonIcon,
+  IonChip, IonLabel, IonIcon,
 } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { mapActions, mapGetters } from "vuex";
+import HeaderComponent from '../../components/HeaderComponent.vue';
 
-import {  closeCircle, starOutline, warningOutline, documentAttachOutline } from 'ionicons/icons';
+import { closeCircle, starOutline, warningOutline, documentAttachOutline } from 'ionicons/icons';
 
 export default defineComponent({
   name: 'DashboardPage',
@@ -78,6 +93,7 @@ export default defineComponent({
     IonButton,
     IonChip, IonLabel, IonIcon,
     //   IonList, IonCard, IonLabel, IonGrid, IonRow, IonCol, IonInput
+    HeaderComponent
   },
   data() {
     return {

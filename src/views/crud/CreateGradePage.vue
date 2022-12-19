@@ -58,6 +58,8 @@ export default defineComponent({
       subject: '',
       grade: 0,
       remarks: '',
+      action: '',
+      grade_id: '',
     }
   },
   components: {
@@ -83,7 +85,8 @@ export default defineComponent({
   },
   methods: {
     ...mapActions('grades', [
-      'newGrade'
+      'newGrade',
+      'updateGrade'
     ]),
     ...mapActions('users', [
       'fetchUsers'
@@ -91,24 +94,52 @@ export default defineComponent({
     navigateTo(path) {
       this.$router.push({ 'path': path });
     },
-    saveGrade(){
+    saveGrade() {
       const { subject, grade, remarks } = this;
       const { user_id } = this.$route.params;
-      this.newGrade({
-        user_id,
-        subject,
-        grade,
-        remarks
-      }).then((e) => {
-        if (e == 1)
-          this.fetchUsers().then(() => this.$router.go(-1)).catch(e => console.log(e.message));
-      }).catch(e => console.log(e.message));
+      if (this.action == 'new') {
+        this.newGrade({
+          user_id,
+          subject,
+          grade,
+          remarks
+        }).then((e) => {
+          if (e == 1)
+            this.fetchUsers().then(() => this.$router.go(-1)).catch(e => console.log(e.message));
+        }).catch(e => console.log(e.message));
+      } else {
+        const { grade_id } = this;
+        this.updateGrade({
+          user_id,
+          grade_id,
+          subject,
+          grade,
+          remarks
+        }).then( e => {
+          if (e.status == 1)
+            this.fetchUsers().then(() => this.$router.go(-1)).catch( e => console.log(e.message));
+        })
+        .catch( e => console.log("Error=> ", e));
+      }
+
     }
   },
   created() {
-    console.log("Parameter=> ", this.$route.params);
+    console.log("Parameter=> ", this.$route.params, this.$route.params.grade_id);
+
     const { user_id } = this.$route.params;
     this.user = this.users.find(e => e.id == user_id);
+
+    this.action = 'new';
+
+    if (this.$route.params.grade_id != undefined) {
+      let grade = this.user.grades.find(grade => grade.id == this.$route.params.grade_id);
+      this.grade = grade.grade;
+      this.remarks = grade.remarks;
+      this.subject = grade.subject;
+      this.action = 'update';
+      this.grade_id = grade.id;
+    }
 
     this.remarks = this.grade > 74 ? 'PASSED' : 'FAILED';
   }

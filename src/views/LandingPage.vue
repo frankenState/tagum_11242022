@@ -1,10 +1,6 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Landing</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <header-component title="Landing Page" />
     <ion-content :fullscreen="true">
       <ion-grid>
         <ion-row>
@@ -37,6 +33,7 @@
 import { IonImg, IonButton, IonContent, IonPage, IonDatetime } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import bg from '../assets/imgs/bg-img.png';
+import HeaderComponent from '../components/HeaderComponent.vue';
 
 export default defineComponent({
   name: 'HomePage',
@@ -45,7 +42,9 @@ export default defineComponent({
     IonPage,
     IonButton,
     IonDatetime,
-    IonImg
+    IonImg,
+
+    HeaderComponent
   },
   data() {
     return {

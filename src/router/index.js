@@ -14,11 +14,18 @@ import Registration from '../views/authentication/Registration';
 import Dashboard from '../views/authentication/Dashboard';
 import UsersPage from '../views/crud/UsersPage';
 import CreateGradePage from '../views/crud/CreateGradePage';
+import AllUsers from '../views/crud/AllUsers';
+
 
 const routes = [
   {
     path: '/',
     redirect: '/landing',
+  },
+  {
+    path: '/all-users',
+    name: 'AllUsers',
+    component: AllUsers
   },
   {
     path: '/landing',
@@ -31,7 +38,7 @@ const routes = [
     component: UsersPage
   },
   {
-    path: '/new-grade/:user_id',
+    path: '/new-grade/:user_id/:grade_id?',
     name: 'NewGradePage',
     component: CreateGradePage
   },
